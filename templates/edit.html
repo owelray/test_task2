@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Payment Number {{ payment.id }}</title>
+  </head>
+  <body>
+    <h1>Edit Payment</h1>
+    <form method="POST" name="edit-payment">
+      {% csrf_token %}
+      <label>Amount</label>
+      {{ form.amount }}
+      <label>Purpose of payment</label>
+      {{ form.purpose_of_payment }}
+      <label>Status</label>
+      {{ form.status }}
+      <input type="submit" value="Edit" name="payment-edit" />
+    </form>
+  </body>
+</html>

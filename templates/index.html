@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List</title>
+  </head>
+  <body>
+    <h1>Create Payment</h1>
+    <form method="POST" name="add-payment">
+      {% csrf_token %}
+      <label>Amount</label>
+      {{ form.amount }}
+      <label>Purpose of payment</label>
+      {{ form.purpose_of_payment }}
+      <input type="submit" value="Create" name="payment-create" />
+    </form>
+    <h1>Payments</h1>
+    <table>
+      <thead>
+        <th>Number</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Purpose of payment</th>
+        <th>Status</th>
+      </thead>
+      {% for payment in payments %}
+      <tr>
+        <td>{{ payment.id }}</td>
+        <td>{{ payment.datetime|date:"M d, Y" }}</td>
+        <td>{{ payment.amount }}</td>
+        <td>{{ payment.purpose_of_payment }}</td>
+        <td>{{ payment.get_status_display }}</td>
+        <td><a href="/edit/{{ payment.id }}">Edit</a></td>
+        <td><a href="/delete/{{ payment.id }}">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
